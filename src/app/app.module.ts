@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { TodoComponent } from './components/todo/todo.component';
 import { CounterTestAComponent } from './components/counter-test-a/counter-test-a.component';
 import { CounterTestBComponent } from './components/counter-test-b/counter-test-b.component';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './store/counter/counter.recuder';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { CounterTestBComponent } from './components/counter-test-b/counter-test-
     CommonModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({ count: counterReducer }, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CounterStateService } from 'src/app/services/counter-state.service';
+import { decrement, increment, reset } from 'src/app/store/counter/counter.action';
 
 @Component({
   selector: 'app-counter-test-a',
@@ -8,7 +11,7 @@ import { CounterStateService } from 'src/app/services/counter-state.service';
 })
 export class CounterTestAComponent implements OnInit {
 
-  constructor(private counterStateService:CounterStateService) { }
+  constructor(private counterStateService:CounterStateService, private store: Store<{ count: number }>) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +27,19 @@ export class CounterTestAComponent implements OnInit {
 
   reset(){
     this.counterStateService.reset();
+  }
+
+  increaseRx() {
+    // component içinden bir action fırlatıyoruz
+    this.store.dispatch(increment())
+  }
+
+  decreaseRx(){
+    this.store.dispatch(decrement());
+  }
+
+  resetRx(){
+    this.store.dispatch(reset());
   }
 
 }
